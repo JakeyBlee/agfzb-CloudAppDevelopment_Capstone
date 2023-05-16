@@ -108,7 +108,7 @@ def get_dealer_reviews_from_cf(url, dealer_id):
 def analyze_review_sentiments(dealer_review):
 # - Call get_request() with specified arguments
 # - Get the returned sentiment label such as Positive or Negative
-    apikey = "N9vVRsCJ2K04bwfVlfvNgAhdQcKm0ntwpLNyIvjV7QA1"
+    apikey = ""
     url = "https://api.eu-gb.natural-language-understanding.watson.cloud.ibm.com/instances/75dd05b6-057f-42f5-b2de-915fb756d17a"
     
     authenticator = IAMAuthenticator(apikey)
