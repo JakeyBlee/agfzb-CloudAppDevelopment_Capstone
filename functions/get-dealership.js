@@ -13,9 +13,10 @@ async function main(params) {
           includeDocs: true
         });
         let dealerships = response.result.rows.map(row => ({
+            full_name: row.doc.full_name,
+            short_name: row.doc.short_name,
             id: row.doc.id,
             city: row.doc.city,
-            state: row.doc.state,
             st: row.doc.st,
             address: row.doc.address,
             zip: row.doc.zip,
@@ -25,6 +26,10 @@ async function main(params) {
         if(params.state){
             dealerships = dealerships.filter(res => res.st.toLowerCase() == params.state.toLowerCase())
             if(dealerships.length == 0 ) throw new Error("404: The state does not exist");
+        };
+        if(params.dealerId){
+            dealerships = dealerships.filter(res => res.id == params.dealerId)
+            if(dealerships.length == 0 ) throw new Error("404: The dealer ID does not exist");
         };
         if(dealerships.length == 0 ) throw new Error("404: The database is empty");
         return { body: dealerships };

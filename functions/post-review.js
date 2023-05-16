@@ -8,18 +8,8 @@ async function main(params) {
       });
       cloudant.setServiceUrl(params.COUCH_URL);
       try {
-        const review = {
-            id: params.id,
-            name: params.name,
-            dealership: params.dealership,
-            review: params.review,
-            purchase: params.purchase,
-            another: params.another,
-            purchase_date: params.purchase_date,
-            car_make: params.car_make,
-            car_model: params.car_model,
-            car_year: params.car_year
-        };
+        const payload = params.__ow_body;
+        const review = payload.review;
         let response = await cloudant.postDocument({
           db: 'reviews',
           document: review

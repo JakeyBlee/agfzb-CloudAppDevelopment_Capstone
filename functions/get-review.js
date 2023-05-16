@@ -25,7 +25,7 @@ async function main(params) {
         }));
         const filteredReviews = reviews.filter(res => res.dealership == params.dealerId);
         if(filteredReviews.length == 0){
-            throw new Error("404: dealerId does not exist");
+            throw new Error("404: No reviews found for that dealer ID");
         }
         return { body: filteredReviews };
       } catch (error) {
