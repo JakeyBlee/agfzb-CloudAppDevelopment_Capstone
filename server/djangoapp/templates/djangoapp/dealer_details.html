@@ -1,18 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dealership Review</title>
-    {% load static %}
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
-
-    <body>
-
-    <!--Add a nav bar here -->
-
+{% extends 'djangoapp/navbar.html' %}
+{% block content %}
+<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <h1 class="pb-3 text-center">Reviews for {{ dealership.full_name }}</h1>
     <!-- Add reviews as cards -->
+    <div class="card-columns">
+        {% for review in reviews %}
+            <div class="card">
+                <div class="card-header" style="padding:5px">
+                    {% if review.sentiment == "positive" %}
+                    <img class="card-img-left" style="height:40px" src="{{ MEDIA_URL }}/emoji/positive.png"/>
+                    {% elif review.sentiment == "neutral" %}
+                    <img class="card-img-left" style="height:40px" src="{{ MEDIA_URL }}/emoji/neutral.png"/>
+                    {% else %}
+                    <img class="card-img-left" style="height:40px" src="{{ MEDIA_URL }}/emoji/negative.png"/>
+                    {% endif %}
+                </div>
 
-    </body>
-
-</html>
+                <div class="card-body">
+                    <p class="card-title" style="font-weight:bolder">{{ review.car_make }}, {{ review.car_model }}</p>
+                    <p class="card-title" style="font-weight:bolder">{{ review.purchase_date }}</p>
+                    <p class="card-text">{{ review.review }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
